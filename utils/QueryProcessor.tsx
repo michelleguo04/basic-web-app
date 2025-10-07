@@ -15,5 +15,20 @@ export default function QueryProcessor(query: string): string {
     return "myguo";
   }
 
+  if (query.toLowerCase().includes("plus")) {
+    // Add the first two integers found in the query (supports negatives)
+    const nums = query.match(/-?\d+/g)?.map((n) => parseInt(n, 10)) || [];
+    if (nums.length >= 2) {
+      return String(nums[0] + nums[1]);
+    }
+  }
+  if (query.toLowerCase().includes("largest")) {
+    // Return the largest of the first three integers found in the query
+    const nums = query.match(/-?\d+/g)?.map((n) => parseInt(n, 10)) || [];
+    if (nums.length >= 3) {
+      const [a, b, c] = nums;
+      return String(Math.max(a, b, c));
+    }
+  }
   return "";
 }
